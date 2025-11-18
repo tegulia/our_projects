@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="225" viewBox="0 0 400 225">
+  <rect width="400" height="225" fill="#f0f8ea"/>
+  <text x="200" y="100" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#2c7a2c">蔬食料理课</text>
+  <text x="200" y="130" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5a9a5a">学员管理与统计系统</text>
+  <circle cx="120" cy="160" r="15" fill="#8bc34a"/>
+  <circle cx="200" cy="160" r="15" fill="#4caf50"/>
+  <circle cx="280" cy="160" r="15" fill="#2e7d32"/>
+</svg>

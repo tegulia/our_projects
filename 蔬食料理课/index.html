@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蔬食料理课程学员管理与统计表</title>
+    
+    <!-- Bootstrap 5.3.0 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <header class="bg-primary text-white py-3 mb-4">
+            <div class="container">
+                <div class="text-center mb-0">
+                    <div class="course-title-main">
+                        <i class="fas fa-leaf me-2"></i>
+                        蔬食料理课
+                    </div>
+                    <div class="course-title-sub">学员管理和签到统计</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Statistics Dashboard -->
+        <section class="container mb-4">
+            <div class="row g-3">
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stats-card h-100">
+                        <div class="card-body text-center">
+                            <div class="stats-icon text-primary mb-2">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">全课学员总数</h5>
+                            <p class="stats-number" id="totalFullCourseStudents">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stats-card h-100">
+                        <div class="card-body text-center">
+                            <div class="stats-icon text-success mb-2">
+                                <i class="fas fa-user-check fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">单次学员总数</h5>
+                            <p class="stats-number" id="totalSingleSessionStudents">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stats-card h-100">
+                        <div class="card-body text-center">
+                            <div class="stats-icon text-info mb-2">
+                                <i class="fas fa-calendar-check fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">本月签到次数</h5>
+                            <p class="stats-number" id="monthlyAttendance">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card stats-card h-100">
+                        <div class="card-body text-center">
+                            <div class="stats-icon text-warning mb-2">
+                                <i class="fas fa-chart-line fa-2x"></i>
+                            </div>
+                            <h5 class="card-title">平均出勤率</h5>
+                            <p class="stats-number" id="averageAttendanceRate">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <section class="container mb-4">
+            <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab">
+                        <i class="fas fa-users me-2"></i>学员管理
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
+                        <i class="fas fa-calendar-check me-2"></i>签到记录
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab">
+                        <i class="fas fa-calendar-alt me-2"></i>课程安排
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab">
+                        <i class="fas fa-chart-bar me-2"></i>统计分析
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="mainTabsContent">
+                <!-- Students Tab -->
+                <div class="tab-pane fade show active" id="students" role="tabpanel">
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">学员信息管理</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal">
+                                <i class="fas fa-plus me-1"></i>添加学员
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="studentsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>学员ID</th>
+                                            <th>姓名</th>
+                                            <th>联系电话</th>
+                                            <th>报名类型</th>
+                                            <th>剩余课时</th>
+                                            <th>备注</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentsTableBody">
+                                        <!-- 表格数据将通过JavaScript动态填充 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Tab -->
+                <div class="tab-pane fade" id="attendance" role="tabpanel">
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">签到记录管理</h5>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#attendanceModal">
+                                <i class="fas fa-plus me-1"></i>添加签到记录
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="attendanceTable">
+                                    <thead>
+                                        <tr>
+                                            <th>签到人数</th>
+                                            <th>学员ID</th>
+                                            <th>姓名</th>
+                                            <th>签到日期</th>
+                                            <th>课程序号</th>
+                                            <th>扣课类型</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceTableBody">
+                                        <!-- 表格数据将通过JavaScript动态填充 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Tab -->
+                <div class="tab-pane fade" id="schedule" role="tabpanel">
+                    <div class="card mt-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">课程安排管理</h5>
+                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#courseModal">
+                                <i class="fas fa-plus me-1"></i>添加课程
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="scheduleTable">
+                                    <thead>
+                                        <tr>
+                                            <th>课程序号</th>
+                                            <th>课程日期</th>
+                                            <th>课程主题</th>
+                                            <th>授课教师</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="scheduleTableBody">
+                                        <!-- 表格数据将通过JavaScript动态填充 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Tab -->
+                <div class="tab-pane fade" id="statistics" role="tabpanel">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5 class="mb-0">数据统计分析</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="chart-container">
+                                        <h6 class="text-center mb-3">学员类型分布</h6>
+                                        <canvas id="studentTypeChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="chart-container">
+                                        <h6 class="text-center mb-3">课程出勤情况</h6>
+                                        <canvas id="attendanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Student Modal -->
+    <div class="modal fade" id="studentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentModalTitle">添加学员</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="studentForm">
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label">学员序号</label>
+                            <input type="text" class="form-control" id="studentId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="studentName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentPhone" class="form-label">联系电话</label>
+                            <input type="tel" class="form-control" id="studentPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="enrollmentType" class="form-label">报名类型</label>
+                            <select class="form-select" id="enrollmentType" required>
+                                <option value="">请选择报名类型</option>
+                                <option value="全课">全课</option>
+                                <option value="单次">单次</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="purchasedClasses" class="form-label">购买课时</label>
+                            <input type="number" class="form-control" id="purchasedClasses" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentNotes" class="form-label">备注</label>
+                            <textarea class="form-control" id="studentNotes" rows="2"></textarea>
+                        </div>
+                        <input type="hidden" id="editingStudentId">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveStudentBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div class="modal fade" id="attendanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attendanceModalTitle">添加签到记录</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="attendanceForm">
+                        <div class="mb-3">
+                            <label for="attendanceStudentId" class="form-label">学员ID</label>
+                            <select class="form-select" id="attendanceStudentId" required>
+                                <option value="">请选择学员</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="attendanceStudentName" class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="attendanceStudentName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="attendanceDate" class="form-label">签到日期</label>
+                            <input type="date" class="form-control" id="attendanceDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseNumber" class="form-label">课程序号</label>
+                            <input type="number" class="form-control" id="courseNumber" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deductionType" class="form-label">扣课类型</label>
+                            <select class="form-select" id="deductionType" required>
+                                <option value="">请选择扣课类型</option>
+                                <option value="常规">常规</option>
+                                <option value="补课">补课</option>
+                            </select>
+                        </div>
+                        <input type="hidden" id="editingAttendanceId">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success" id="saveAttendanceBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div class="modal fade" id="courseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseModalTitle">添加课程</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="courseForm">
+                        <div class="mb-3">
+                            <label for="courseNumberInput" class="form-label">课程序号</label>
+                            <input type="number" class="form-control" id="courseNumberInput" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseDate" class="form-label">课程日期</label>
+                            <input type="date" class="form-control" id="courseDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseTopic" class="form-label">课程主题</label>
+                            <input type="text" class="form-control" id="courseTopic" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="courseTeacher" class="form-label">授课教师</label>
+                            <input type="text" class="form-control" id="courseTeacher" required>
+                        </div>
+                        <input type="hidden" id="editingCourseId">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="saveCourseBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3.0 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="libs/chart.min.js"></script>
+    <!-- 确保Chart.js已加载的检查脚本 -->
+    <script>
+        // 确保Chart.js已完全加载
+        window.addEventListener('load', function() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js未能正确加载');
+            } else {
+                console.log('Chart.js已成功加载');
+            }
+        });
+    </script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

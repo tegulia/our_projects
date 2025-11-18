@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>石头剪刀布游戏</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="game-theme-override.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>石头剪刀布</h1>
+        </header>
+        
+        <main>
+            <section class="score-board">
+                <div class="score-item">
+                    <h3>玩家</h3>
+                    <div class="score" id="player-score">0</div>
+                </div>
+                <div class="score-item">
+                    <h3>电脑</h3>
+                    <div class="score" id="computer-score">0</div>
+                </div>
+            </section>
+            
+            <section class="game-area">
+                <div class="player-side">
+                    <h2>你的选择</h2>
+                    <div class="choice-display" id="player-choice">
+                        <div class="choice-icon">?</div>
+                    </div>
+                </div>
+                
+                <div class="vs-divider">
+                    <div class="vs-text">VS</div>
+                </div>
+                
+                <div class="computer-side">
+                    <h2>电脑选择</h2>
+                    <div class="choice-display" id="computer-choice">
+                        <div class="choice-icon">?</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="result-area">
+                <div class="result-text" id="result-text">请选择你的出拳</div>
+            </section>
+            
+            <section class="controls">
+                <div class="choices">
+                    <button class="choice-btn" data-choice="rock">
+                        <div class="btn-icon">✊</div>
+                        <span>石头</span>
+                    </button>
+                    <button class="choice-btn" data-choice="scissors">
+                        <div class="btn-icon">✌️</div>
+                        <span>剪刀</span>
+                    </button>
+                    <button class="choice-btn" data-choice="paper">
+                        <div class="btn-icon">✋</div>
+                        <span>布</span>
+                    </button>
+                </div>
+                <button class="reset-btn" id="reset-btn">重置游戏</button>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="iframe-optimization.js"></script>
+</body>
+</html>

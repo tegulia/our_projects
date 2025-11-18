@@ -1,0 +1,2 @@
+<!-- 这是一个占位图片文件，实际使用时应该替换为真实的项目截图 -->
+<!-- 可以通过访问 https://picsum.photos/seed/vegetarian-cooking/400/225.jpg 获取图片 -->

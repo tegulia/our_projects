@@ -1,0 +1,98 @@
+/* 游戏主题覆盖样式 - 使其与个人网站的淡蓝色主题保持一致 */
+
+/* 覆盖游戏背景色 */
+body {
+    background: linear-gradient(135deg, #E6F2FF 0%, #4A90E2 100%) !important;
+}
+
+/* 调整容器样式 */
+.container {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(74, 144, 226, 0.3) !important;
+}
+
+/* 调整标题颜色 */
+h1 {
+    color: #2D3748 !important;
+    text-shadow: none !important;
+}
+
+/* 调整分数板样式 */
+.score-item {
+    background-color: rgba(74, 144, 226, 0.2) !important;
+    color: #2D3748 !important;
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 调整选择显示区域 */
+.choice-display {
+    background-color: rgba(74, 144, 226, 0.2) !important;
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 调整按钮样式 */
+.choice-btn {
+    background-color: rgba(74, 144, 226, 0.3) !important;
+    color: #2D3748 !important;
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2) !important;
+}
+
+.choice-btn:hover {
+    background-color: rgba(74, 144, 226, 0.5) !important;
+}
+
+/* 调整重置按钮 */
+.reset-btn {
+    background-color: #4A90E2 !important;
+    color: white !important;
+}
+
+.reset-btn:hover {
+    background-color: #3A7BC8 !important;
+}
+
+/* 调整结果显示区域 */
+.result-text {
+    background-color: rgba(74, 144, 226, 0.2) !important;
+    color: #2D3748 !important;
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.2) !important;
+}
+
+/* 调整获胜/失败/平局状态颜色 */
+.result-text.win {
+    color: #2D3748 !important;
+    background-color: rgba(72, 187, 120, 0.3) !important;
+}
+
+.result-text.lose {
+    color: #2D3748 !important;
+    background-color: rgba(245, 101, 101, 0.3) !important;
+}
+
+.result-text.draw {
+    color: #2D3748 !important;
+    background-color: rgba(237, 137, 54, 0.3) !important;
+}
+
+/* 调整获胜动画效果 */
+.choice-display.winner {
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.8) !important;
+}
+
+/* 调整VS文字颜色 */
+.vs-text {
+    color: #4A90E2 !important;
+    text-shadow: none !important;
+}
+
+/* 调整二级标题颜色 */
+h2 {
+    color: #2D3748 !important;
+}
+
+/* 调整响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+}
